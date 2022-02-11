@@ -16,6 +16,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
+    
     {
         $user= User::where('email', $request->email)->first();
         // print_r($data);
@@ -53,13 +54,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        try {
         $user=User::create(['lastname'=>$request->lastname,
                       'firstname'=>$request->firstname,
                       'birthday'=>$request->birthday,
                       'email'=>$request->email,
                       'password' => Hash::make($request->password)
                     ])->save();
-        return response()->json($user);
+                    return response()->json($user);
+} catch (\Throwable $th) {
+    return response()->json([
+        'status' => 400,
+        'error' => 'Cet email est déjà utilisé.',
+        'msg' => $th->getMessage()
+    ]);
+}
     }
 
     /**
