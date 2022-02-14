@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Agent extends Model
 {
     use HasFactory;
-
+    protected $guarded = ['id'];
     protected $fillable = [
         'lastname',
         'firstname',

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\UserController;
 // use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AuthController;
+// use App\Http\Controllers\BookingController;
 
 
 /*
@@ -18,15 +19,17 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::resource('/user', UserController::class);
 
 Route::resource('/agent', AgentController::class);
+Route::resource('/dashboardbooking', BookingController::class);
+Route::resource('/booking', BookingController::class);
 // Route::post('/connexion', [UserController::class,'index']);
-
+Route::resource('/dashboardclient', BookingController::class);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -39,3 +42,4 @@ Route::get('/token', function (Request $request) {
  
     // ...
 });
+

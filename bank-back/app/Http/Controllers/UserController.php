@@ -55,6 +55,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
+        
         $user=User::create(['lastname'=>$request->lastname,
                       'firstname'=>$request->firstname,
                       'birthday'=>$request->birthday,

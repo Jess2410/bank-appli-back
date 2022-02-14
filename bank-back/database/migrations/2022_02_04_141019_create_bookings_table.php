@@ -15,12 +15,12 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->date('bookingday');
-            $table->integer('bookinghour');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('agent_id');
-            $table->foreign('agent_id')->references('id')->on('agents');
+            $table->string('bookingday');
+            $table->string('bookinghour');
+            // $table->unsignedBigInteger('user_id');
+            // $table->foreign('user_id')->references('id')->on('users');
+            // $table->unsignedBigInteger('agent_id');
+            // $table->foreign('agent_id')->references('id')->on('agents');
             $table->timestamps();
         });
     }

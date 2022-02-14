@@ -31,14 +31,7 @@ $validatedData = $request->validate([
                    'email' => $validatedData['email'],
                    'password' => Hash::make($validatedData['password']),
        ]);
-
-    //    $user=User::create(['lastname'=>$request->lastname,
-    //                   'firstname'=>$request->firstname,
-    //                   'birthday'=>$request->birthday,
-    //                   'email'=>$request->email,
-    //                   'password' => Hash::make($request->password)
-    //                 ])->save();
-    //     return response()->json($user);
+       
 
 $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -50,6 +43,8 @@ return response()->json([
 
 public function login(Request $request)
 {
+
+    
 if (!Auth::attempt($request->only('email', 'password'))) {
 return response()->json([
 'message' => 'Invalid login details'

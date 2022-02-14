@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Booking;
+use App\Models\Agent;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AgentController;
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -13,9 +19,9 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        $booking = Booking::all();
+        return response()->json($booking);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +31,6 @@ class BookingController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -34,7 +39,17 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    // $user = Auth::guard('api')->user();
+    // var_dump(user);
+    // die();
+    
+       $booking=Booking::create(
+            ['bookingday'=>$request->bookingday,
+             'bookinghour'=>$request->bookinghour,
+            //  'user_id' => auth('api')->user()->id,
+            //  'agent_id'=>$request->agent_id,
+             ])->save();
+        return response()->json($booking);
     }
 
     /**
