@@ -20,6 +20,7 @@ class BookingController extends Controller
     public function index()
     {
         $booking = Booking::all();
+        $booking = Booking::orderBy('bookingday')->get();
         return response()->json($booking);
     }
     /**
@@ -48,6 +49,7 @@ class BookingController extends Controller
              'bookinghour'=>$request->bookinghour,
             //  'user_id' => auth('api')->user()->id,
             //  'agent_id'=>$request->agent_id,
+            
              ])->save();
         return response()->json($booking);
     }
