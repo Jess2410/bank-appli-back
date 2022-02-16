@@ -26,10 +26,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('/user', UserController::class);
 
 Route::resource('/agent', AgentController::class);
+Route::resource('/dashboard', BookingController::class);
 Route::resource('/dashboardbooking', BookingController::class);
-Route::resource('/booking', BookingController::class);
-
-Route::resource('/dashboardclient', BookingController::class);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
