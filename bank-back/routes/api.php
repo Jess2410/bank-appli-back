@@ -28,7 +28,7 @@ Route::resource('/user', UserController::class);
 Route::resource('/agent', AgentController::class);
 Route::resource('/dashboardbooking', BookingController::class);
 Route::resource('/booking', BookingController::class);
-// Route::post('/connexion', [UserController::class,'index']);
+
 Route::resource('/dashboardclient', BookingController::class);
 
 Route::post('/register', [AuthController::class, 'register']);
