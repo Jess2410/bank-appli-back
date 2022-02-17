@@ -19,11 +19,11 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::resource('/user', UserController::class);
+// Route::resource('/user', UserController::class);
 
 Route::resource('/agent', AgentController::class);
 Route::resource('/dashboard', BookingController::class);
@@ -32,6 +32,7 @@ Route::resource('/dashboardbooking', BookingController::class);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
+Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 
 Route::get('/token', function (Request $request) {
     $token = $request->session()->token();

@@ -17,8 +17,8 @@ class CreateBookingsTable extends Migration
             $table->id();
             $table->string('bookingday');
             $table->string('bookinghour');
-            // $table->unsignedBigInteger('users_id');
-            // $table->foreign('users_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('users_id')->references('id')->on('users');
             $table->unsignedBigInteger('agent_id');
             $table->foreign('agent_id')->references('id')->on('agents');
             $table->timestamps();
