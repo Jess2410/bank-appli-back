@@ -66,7 +66,7 @@ class BookingController extends Controller
             $booking=Booking::create(
                 ['bookingday'=>$request->bookingday,
                 'bookinghour'=>$request->bookinghour,
-                //  'users_id'=>$request->users_id,
+                 'user_id'=>auth()->user()->id,
                 'agent_id'=>$available_agents_ids[$agent_index],
                 ])->save();
             return response()->json($booking);

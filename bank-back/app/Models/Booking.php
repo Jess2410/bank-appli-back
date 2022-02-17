@@ -12,7 +12,7 @@ class Booking extends Model
     protected $fillable = [
         'bookingday',
         'bookinghour',
-        'users_id',
+        'user_id',
         'agent_id'
     ];
 }
