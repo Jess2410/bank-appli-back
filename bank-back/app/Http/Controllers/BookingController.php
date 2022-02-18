@@ -41,34 +41,27 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        // $user = Auth::guard('api')->user();
-        // var_dump(user);
-        // die();
-        
-        // Liste des ids de tous les agents
-        // Agent::all() ----> Récupère tous les agents
-        // -> pluck("id") -----> Récupère uniquement les valeurs de la colonne id
-        // -> toArray() -----> renvoie les résultas sous forme de tableau
+       
+        // Liste des IDs de tous les agents
         $agents_ids = Agent::all()->pluck("id")->toArray();
-  
         
-        // quel agent est assigné à un créneau
-        // où bookingday = request bookingday
-        // et où bookinghour = request bookinghour
+        
+        // Liste des IDs de tous les agents bookés
         $booked_agents_ids = Booking::where([['bookingday', $request->bookingday], ['bookinghour', $request->bookinghour]])->pluck("agent_id")->toArray();
-
-        // agents disponibles
+   
+        // Liste des IDs de tous les agents disponibles
         $available_agents_ids = array_diff($agents_ids, $booked_agents_ids);
 
         if(count($available_agents_ids) > 0) {
             $agent_index = rand(0, count($available_agents_ids) - 1);
-
+            
             $booking=Booking::create(
                 ['bookingday'=>$request->bookingday,
                 'bookinghour'=>$request->bookinghour,
-                 'user_id'=>auth()->user()->id,
+                //  'user_id'=>auth()->user(),
                 'agent_id'=>$available_agents_ids[$agent_index],
                 ])->save();
+
             return response()->json($booking);
         }
 
