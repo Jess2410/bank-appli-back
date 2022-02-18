@@ -23,18 +23,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('/user', UserController::class);
-
+// Routes Resource
 Route::resource('/agent', AgentController::class);
+Route::resource('/dashboard', BookingController::class);
 Route::resource('/dashboardbooking', BookingController::class);
-Route::resource('/booking', BookingController::class);
-// Route::post('/connexion', [UserController::class,'index']);
-Route::resource('/dashboardclient', BookingController::class);
 
+//Route Sanctum
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
-
+Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::get('/token', function (Request $request) {
     $token = $request->session()->token();
  

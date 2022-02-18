@@ -36,12 +36,6 @@ class AgentController extends Controller
      */
     public function store(Request $request)
     {
-        // $agent=Agent::create(['lastname'=>$request->lastname,
-        //               'firstname'=>$request->firstname,
-        //               'email'=>$request->email,
-        //               'password' => Hash::make($request->password)
-        //             ])->save();
-        // return response()->json($agent);
 
         try {
             $agent=Agent::create(['lastname'=>$request->lastname,

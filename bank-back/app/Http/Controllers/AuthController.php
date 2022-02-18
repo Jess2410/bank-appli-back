@@ -14,30 +14,29 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+     
 
 
 public function register(Request $request)
 {
 $validatedData = $request->validate([
-'name' => 'required|string|max:255',
-                   'email' => 'required|string|email|max:255|unique:users',
-                   'password' => 'required|string|min:8',
+                    'email' => 'required|string|email|max:255|unique:users',
+                    'password' => 'required|string|min:8',
 ]);
 
-      $user = User::create([
-              'firstname' => $validatedData['firstname'],
-              'lastname' => $validatedData['lastname'],
-              'birthday' => $validatedData['birthday'],
-                   'email' => $validatedData['email'],
-                   'password' => Hash::make($validatedData['password']),
-       ]);
-       
+          $user = User::create([
+                    'lastname'=>$request->lastname,
+                    'firstname'=>$request->firstname,
+                    'birthday'=>$request->birthday,
+                    'email' => $validatedData['email'],
+                    'password' => Hash::make($validatedData['password']),
+          ]);
 
 $token = $user->createToken('auth_token')->plainTextToken;
 
 return response()->json([
-              'access_token' => $token,
-                   'token_type' => 'Bearer',
+               'access_token' => $token,
+                    'token_type' => 'Bearer',
 ]);
 }
 

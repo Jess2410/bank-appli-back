@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Agent;
+use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AuthController;
@@ -40,18 +41,31 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-    // $user = Auth::guard('api')->user();
-    // var_dump(user);
-    // die();
-    
-       $booking=Booking::create(
-            ['bookingday'=>$request->bookingday,
-             'bookinghour'=>$request->bookinghour,
-            //  'user_id' => auth('api')->user()->id,
-            //  'agent_id'=>$request->agent_id,
+       
+        // Liste des IDs de tous les agents
+        $agents_ids = Agent::all()->pluck("id")->toArray();
+        
+        
+        // Liste des IDs de tous les agents bookés
+        $booked_agents_ids = Booking::where([['bookingday', $request->bookingday], ['bookinghour', $request->bookinghour]])->pluck("agent_id")->toArray();
+   
+        // Liste des IDs de tous les agents disponibles
+        $available_agents_ids = array_diff($agents_ids, $booked_agents_ids);
+
+        if(count($available_agents_ids) > 0) {
+            $agent_index = rand(0, count($available_agents_ids) - 1);
             
-             ])->save();
-        return response()->json($booking);
+            $booking=Booking::create(
+                ['bookingday'=>$request->bookingday,
+                'bookinghour'=>$request->bookinghour,
+                //  'user_id'=>auth()->user(),
+                'agent_id'=>$available_agents_ids[$agent_index],
+                ])->save();
+
+            return response()->json($booking);
+        }
+
+        return response()->json(["message" => "Aucun agent disponible"], 422);
     }
 
     /**
