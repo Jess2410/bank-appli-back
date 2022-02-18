@@ -1,3 +1,45 @@
+------------ LARAVEL ---------------
+
+Le lancement :
+php artisan serve (Starting Laravel development server: http://127.0.0.1:8000)
+
+Package Sanctum :
+composer require laravel/sanctum
+
+------------ MySQL ---------------
+
+CONNEXION A LA BASE DE DONNEES MySQL
+
+-   Démarrer MySQL dans XAMPP
+-   ![image](https://user-images.githubusercontent.com/89982670/154599770-fe35451b-fb51-4776-93db-e7a0acbb0834.png)
+-   mysql -u root -p
+
+CREATION DE LA BASE DE DONNEES
+
+-   create database bank;
+
+UTILISATION DE LA BASE DE DONNEES
+
+-   use bank;
+
+Vérifier qu’elle soit connectée dans le fichier ".env": DATABASE = bank
+Puis quitter :
+
+-   exit
+
+Migrer les tables :
+
+-   php artisan migrate
+
+Tests API sous Insomnia :
+
+![image](https://user-images.githubusercontent.com/89982670/154599547-447d1723-3301-42f6-8d2d-e4a8ca54cc95.png)
+
+Réalisation et gestion de la BDD Sous MySQL :
+
+![image](https://user-images.githubusercontent.com/89982670/154599720-9b175cb8-9718-434b-a1cd-40fac786bccb.png)
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
